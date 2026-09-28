@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DVATONE — Створіть простір з характером</title>
+<meta name="description" content="DVATONE — архітектурні мультиколорові покриття від Dialcolor. Каталог відтінків, генератор композицій, візуалізація в інтер'єрі.">
+<meta name="theme-color" content="#12100e">
+<link rel="icon" type="image/png" href="img/logo-light.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,300;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/dv033.webp">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip" href="#main" data-i18n="skip">Перейти до змісту</a>
+
+<!-- ============ HEADER ============ -->
+<header class="hdr" id="hdr">
+  <div class="hdr__in">
+    <a class="hdr__logo" href="#top" aria-label="DVATONE">
+      <img src="img/logo-light.png" alt="DVATONE" width="720" height="123">
+    </a>
+    <nav class="hdr__nav" aria-label="Main">
+      <a href="#collection" data-i18n="nav.collection">Колекція</a>
+      <a href="#generator" data-i18n="nav.generator">Генератор</a>
+      <a href="#interiors" data-i18n="nav.interiors">Інтер'єри</a>
+      <a href="#video" data-i18n="nav.video">Відео</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" data-i18n="nav.contact">Контакти</a>
+    </nav>
+    <div class="hdr__right">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" class="lang__btn is-on" data-lang="uk" aria-pressed="true">UA</button>
+        <span class="lang__sep" aria-hidden="true"></span>
+        <button type="button" class="lang__btn" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn btn--ghost hdr__cta" href="#contact" data-i18n="nav.cta">Консультація</a>
+      <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mnav"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mnav" id="mnav" aria-hidden="true">
+  <nav class="mnav__links">
+    <a href="#collection"><i>01</i><span data-i18n="nav.collection">Колекція</span></a>
+    <a href="#generator"><i>02</i><span data-i18n="nav.generator">Генератор</span></a>
+    <a href="#interiors"><i>03</i><span data-i18n="nav.interiors">Інтер'єри</span></a>
+    <a href="#video"><i>04</i><span data-i18n="nav.video">Відео</span></a>
+    <a href="#faq"><i>05</i><span>FAQ</span></a>
+    <a href="#contact"><i>06</i><span data-i18n="nav.contact">Контакти</span></a>
+  </nav>
+  <div class="mnav__foot">
+    <a href="https://t.me/Dvatone_bot" target="_blank" rel="noopener">Telegram @Dvatone_bot</a>
+    <a href="tel:+380674036309">+38 (067) 403 63 09</a>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero__media" aria-hidden="true">
+    <picture>
+      <source media="(max-width: 760px)" srcset="img/dv033-m.webp">
+      <img class="hero__img" src="img/dv033.webp" alt="" width="2000" height="1500" fetchpriority="high">
+    </picture>
+    <div class="hero__light"></div>
+    <div class="hero__shade"></div>
+  </div>
+
+  <div class="hero__body wrap">
+    <p class="eyebrow hero__eyebrow"><span class="ln"></span><span data-i18n="hero.eyebrow">Архітектурні мультиколорові покриття</span></p>
+    <h1 class="hero__title">
+      <span class="line"><span data-i18n="hero.t1">Створіть простір</span></span>
+      <span class="line"><span data-i18n="hero.t2"><em>з характером</em></span></span>
+    </h1>
+    <div class="hero__row">
+      <p class="hero__lede" data-i18n="hero.lede">Покриття, у яких колір має глибину, фактуру і світло. Оберіть відтінок, складіть власну композицію та побачте її на стіні ще до нанесення.</p>
+      <div class="hero__ctas">
+        <a class="btn btn--stone" href="#generator"><span data-i18n="hero.cta1">Скласти композицію</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn--line" href="#collection" data-i18n="hero.cta2">Каталог відтінків</a>
+      </div>
+    </div>
+  </div>
+
+  <figure class="hero__tag">
+    <span class="dot"></span>
+    <figcaption>
+      <small data-i18n="hero.sample">Зразок покриття</small>
+      <b>DV 033</b>
+      <span>Multicolor Mineral Structure</span>
+    </figcaption>
+  </figure>
+
+  <div class="hero__meta wrap">
+    <div class="meta"><b data-i18n="hero.m1n">1 066</b><span data-i18n="hero.m1">відтінків у цифровому каталозі</span></div>
+    <div class="meta"><b>NCS · 5051 · RAL</b><span data-i18n="hero.m2">колірні стандарти каталогу</span></div>
+    <div class="meta"><b>Dialcolor</b><span data-i18n="hero.m3">виробник-партнер</span></div>
+    <a class="meta meta--scroll" href="#about"><span data-i18n="hero.scroll">Гортайте</span><i aria-hidden="true"></i></a>
+  </div>
+</section>
+
+<!-- ============ ABOUT / MANIFESTO ============ -->
+<section class="about light" id="about">
+  <div class="wrap about__grid">
+    <p class="label" data-reveal><b>01</b><span data-i18n="about.label">Про Dvatone</span></p>
+    <blockquote class="about__quote" data-reveal>
+      <span data-i18n="about.quote">Колір — це відчуття, <em>а не код.</em></span>
+    </blockquote>
+    <div class="about__text" data-reveal>
+      <p data-i18n="about.p1">Це настрій кімнати й тло вашого життя. Dvatone народився з простого переконання наших партнерів з Dialcolor: душу кольору варто побачити ще до того, як він торкнеться стін.</p>
+      <p data-i18n="about.p2">Зразок на картці повідомляє колір, але не розповідає, як він гратиме зі світлом у вашому домі. Тому ми передаємо глибину, фактуру й тонкі переходи тону, що роблять покриття Dialcolor особливими.</p>
+    </div>
+    <div class="about__aud" data-reveal>
+      <div class="aud">
+        <span class="aud__k" data-i18n="about.a1k">Власникам житла</span>
+        <p data-i18n="about.a1">Впевненість у виборі фінішу, який тішитиме роками.</p>
+      </div>
+      <div class="aud">
+        <span class="aud__k" data-i18n="about.a2k">Дизайнерам і архітекторам</span>
+        <p data-i18n="about.a2">Точний інструмент, щоб підібрати фініш для клієнта та показати його в просторі.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- macro strip -->
+  <div class="strip" data-reveal="clip">
+    <figure class="strip__it"><img src="img/tex/B8A389.webp" alt="RAL 1039" loading="lazy" width="900" height="600"><figcaption>RAL 1039</figcaption></figure>
+    <figure class="strip__it"><img src="img/tex/9F9287.webp" alt="NCS S 4005-Y50R" loading="lazy" width="900" height="600"><figcaption>NCS S 4005-Y50R</figcaption></figure>
+    <figure class="strip__it"><img src="img/tex/C5866E.webp" alt="RAL 3012" loading="lazy" width="900" height="600"><figcaption>RAL 3012</figcaption></figure>
+    <figure class="strip__it"><img src="img/tex/90A488.webp" alt="NCS S 3020-G20Y" loading="lazy" width="900" height="600"><figcaption>NCS S 3020-G20Y</figcaption></figure>
+  </div>
+  <p class="wrap strip__cap"><span data-i18n="strip.cap">Макро · реальні фактури з каталогу Dvatone</span><span>01 — 04</span></p>
+</section>
+
+<!-- ============ COLLECTION ============ -->
+<section class="collection light" id="collection">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label" data-reveal><b>02</b><span data-i18n="col.label">Колекція</span></p>
+      <h2 class="h2" data-reveal data-i18n="col.title">Відтінки <em>з характером</em></h2>
+      <p class="lede" data-reveal data-i18n="col.lede">Кожен відтінок — мультитональна фактура: базовий колір і безліч мікрочастинок, що по-різному ловлять світло.</p>
+    </div>
+
+    <div class="col__bar" data-reveal>
+      <div class="filters" role="group" aria-label="Filter">
+        <button type="button" class="filter is-on" data-filter="all" data-i18n="col.all">Усі</button>
+        <button type="button" class="filter" data-filter="NCS">NCS</button>
+        <button type="button" class="filter" data-filter="5051">5051</button>
+        <button type="button" class="filter" data-filter="RAL">RAL</button>
+      </div>
+      <a class="link-arrow" href="https://dvatone.com/catalog" target="_blank" rel="noopener"><span data-i18n="col.all_link">Весь каталог — 1 066 відтінків</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+    </div>
+
+    <div class="col__grid">
+      <article class="flag" data-reveal>
+        <div class="flag__img"><img src="img/dv033.webp" alt="DV 033 Multicolor Mineral Structure" loading="lazy" width="2000" height="1500"></div>
+        <div class="flag__body">
+          <span class="chip-k" data-i18n="col.flag_k">Флагман</span>
+          <h3>DV 033</h3>
+          <p>Multicolor Mineral Structure</p>
+          <a class="btn btn--dark" href="#generator" data-i18n="col.flag_cta">Створити схожу композицію</a>
+        </div>
+      </article>
+      <div class="cards" id="cards" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GENERATOR ============ -->
+<section class="gen dark" id="generator">
+  <div class="wrap">
+    <div class="sec-head sec-head--dark">
+      <p class="label" data-reveal><b>03</b><span data-i18n="gen.label">Генератор композицій</span></p>
+      <h2 class="h2" data-reveal data-i18n="gen.title">Складіть власну <em>мультиколорову</em> композицію</h2>
+      <p class="lede" data-reveal data-i18n="gen.lede">Оберіть базу та 2–4 акцентні відтінки — прев'ю оновлюється миттєво. Готову композицію можна приміряти в інтер'єрі або надіслати консультанту.</p>
+    </div>
+
+    <div class="app" data-reveal>
+      <div class="app__top">
+        <div class="app__brand"><img src="img/logo-light.png" alt="" width="720" height="123"><span>/ <span data-i18n="gen.app">Генератор</span></span></div>
+        <div class="app__tabs" role="group">
+          <button type="button" class="app__tab is-on" data-scale="wall" data-i18n="gen.wall">Стіна</button>
+          <button type="button" class="app__tab" data-scale="macro" data-i18n="gen.macro">Макро</button>
+        </div>
+        <div class="app__id"><span data-i18n="gen.id">Композиція</span> <b id="compId">#—</b></div>
+      </div>
+
+      <div class="app__body">
+        <div class="app__ctrl">
+          <div class="ctrl">
+            <div class="ctrl__h"><span data-i18n="gen.base">База</span><em id="baseName">—</em></div>
+            <div class="swatches" id="baseSw" role="radiogroup" aria-label="Base"></div>
+          </div>
+          <div class="ctrl">
+            <div class="ctrl__h"><span data-i18n="gen.acc">Акценти · 2–4</span><em id="accCount">0 / 4</em></div>
+            <div class="swatches" id="accSw" aria-label="Accents"></div>
+          </div>
+          <div class="ctrl ctrl--row">
+            <label class="range">
+              <span class="ctrl__h"><span data-i18n="gen.density">Щільність частинок</span><em id="densVal">60%</em></span>
+              <input type="range" id="dens" min="20" max="100" value="60">
+            </label>
+          </div>
+          <div class="ctrl">
+            <div class="ctrl__h"><span data-i18n="gen.grain">Фракція</span></div>
+            <div class="seg" role="radiogroup" id="grain">
+              <button type="button" data-g="0.75">S</button>
+              <button type="button" data-g="1" class="is-on">M</button>
+              <button type="button" data-g="1.4">L</button>
+            </div>
+          </div>
+          <div class="ctrl">
+            <div class="ctrl__h"><span data-i18n="gen.presets">Готові поєднання</span></div>
+            <div class="presets" id="presets"></div>
+          </div>
+        </div>
+
+        <div class="app__stage">
+          <div class="stage">
+            <canvas id="genCanvas" aria-label="Preview" role="img"></canvas>
+            <div class="stage__legend" id="legend"></div>
+            <button type="button" class="stage__shuffle" id="shuffle" aria-label="Shuffle">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+              <span data-i18n="gen.shuffle">Інше поєднання</span>
+            </button>
+          </div>
+          <div class="ratio" id="ratio" aria-hidden="true"></div>
+          <div class="app__actions">
+            <button type="button" class="btn btn--stone" id="toRoom"><span data-i18n="gen.try">Приміряти в інтер'єрі</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></button>
+            <a class="btn btn--line btn--light" href="https://t.me/Dvatone_bot" target="_blank" rel="noopener" data-i18n="gen.send">Обговорити з консультантом</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="gen__note" data-reveal data-i18n="gen.note">Чипи — реальні відтінки з каталогу Dvatone (NCS, 5051, RAL). Прев'ю генерується наживо й передає характер фактури; фінальне поєднання уточнюйте з консультантом.</p>
+  </div>
+</section>
+
+<!-- ============ INTERIORS ============ -->
+<section class="rooms light" id="interiors">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label" data-reveal><b>04</b><span data-i18n="rooms.label">Візуалізація в інтер'єрі</span></p>
+      <h2 class="h2" data-reveal data-i18n="rooms.title">Фактура в просторі, <em>а не на картці</em></h2>
+      <p class="lede" data-reveal data-i18n="rooms.lede">Оберіть інтер'єр і фініш — покриття ляже на площину стіни з урахуванням світла і тіні. Потягніть повзунок, щоб порівняти «до» і «після».</p>
+    </div>
+
+    <div class="rooms__ui" data-reveal>
+      <div class="rooms__tabs" role="group">
+        <button type="button" class="rtab is-on" data-room="d"><i>01</i><span data-i18n="rooms.r1">Вітальня</span></button>
+        <button type="button" class="rtab" data-room="a"><i>02</i><span data-i18n="rooms.r2">Зона відпочинку</span></button>
+        <button type="button" class="rtab" data-room="c"><i>03</i><span data-i18n="rooms.r3">Їдальня</span></button>
+      </div>
+      <div class="rooms__stage" id="roomStage">
+        <canvas id="roomCanvas" role="img" aria-label="Interior visualization"></canvas>
+        <div class="split" id="split" aria-hidden="true"><span class="split__h"><svg viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>
+        <span class="rooms__badge" data-i18n="rooms.badge">Візуалізація</span>
+        <span class="rooms__ba rooms__ba--l" data-i18n="rooms.after">З покриттям</span>
+        <span class="rooms__ba rooms__ba--r" data-i18n="rooms.before">Оригінал</span>
+        <div class="rooms__now" id="roomNow"></div>
+      </div>
+      <div class="rooms__chips" id="roomChips"></div>
+      <p class="rooms__note" data-i18n="rooms.note">Фото інтер'єрів — Unsplash, використані для візуалізації. Фактуру накладено на площину стіни; реальний вигляд залежить від освітлення та способу нанесення.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VIDEO ============ -->
+<section class="video dark dark--warm" id="video">
+  <div class="wrap">
+    <div class="sec-head sec-head--dark">
+      <p class="label" data-reveal><b>05</b><span data-i18n="vid.label">Відео</span></p>
+      <h2 class="h2" data-reveal data-i18n="vid.title">Процес, який <em>варто побачити</em></h2>
+      <p class="lede" data-reveal data-i18n="vid.lede">Від каталогу до готової стіни: нанесення, огляд колекції та робота генератора — коротко і по суті.</p>
+    </div>
+    <div class="vgrid">
+      <button type="button" class="vcard vcard--xl" data-reveal>
+        <span class="vcard__poster vp-process"><canvas id="posterRoom" aria-hidden="true"></canvas></span>
+        <span class="vcard__tag" data-i18n="vid.tag">Відео</span>
+        <span class="vcard__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="vcard__meta"><b data-i18n="vid.v1">Процес нанесення</b><small><span data-i18n="vid.v1s">Відео-інструкція</span> · —:—</small></span>
+        <span class="vcard__soon" data-i18n="vid.soon">Тут буде ваше відео</span>
+      </button>
+      <button type="button" class="vcard" data-reveal>
+        <span class="vcard__poster vp-catalog">
+          <img src="img/tex/B7B3A8.webp" alt="" loading="lazy"><img src="img/tex/C5866E.webp" alt="" loading="lazy"><img src="img/tex/B4986D.webp" alt="" loading="lazy"><img src="img/tex/819BAD.webp" alt="" loading="lazy">
+        </span>
+        <span class="vcard__tag" data-i18n="vid.tag">Відео</span>
+        <span class="vcard__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="vcard__meta"><b data-i18n="vid.v2">Огляд каталогу</b><small><span data-i18n="vid.v2s">Колекція відтінків</span> · —:—</small></span>
+        <span class="vcard__soon" data-i18n="vid.soon">Тут буде ваше відео</span>
+      </button>
+      <button type="button" class="vcard" data-reveal>
+        <span class="vcard__poster vp-gen"><canvas id="posterCanvas" aria-hidden="true"></canvas></span>
+        <span class="vcard__tag" data-i18n="vid.tag">Відео</span>
+        <span class="vcard__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="vcard__meta"><b data-i18n="vid.v3">Генератор: демо</b><small><span data-i18n="vid.v3s">Як скласти композицію</span> · —:—</small></span>
+        <span class="vcard__soon" data-i18n="vid.soon">Тут буде ваше відео</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STEPS ============ -->
+<section class="steps light" id="steps">
+  <div class="wrap">
+    <div class="sec-head sec-head--row">
+      <p class="label" data-reveal><b>06</b><span data-i18n="steps.label">Як обрати фініш</span></p>
+      <h2 class="h2" data-reveal data-i18n="steps.title">Три кроки до <em>впевненого</em> рішення</h2>
+    </div>
+    <ol class="steps__list">
+      <li data-reveal><i>01</i><h3 data-i18n="steps.s1">Оберіть відтінок</h3><p data-i18n="steps.s1p">Перегляньте каталог і відфільтруйте відтінки за колірним стандартом — NCS, 5051 або RAL.</p></li>
+      <li data-reveal><i>02</i><h3 data-i18n="steps.s2">Складіть композицію</h3><p data-i18n="steps.s2p">Поєднайте базу з акцентами в генераторі та приміряйте результат на стіні реального інтер'єру.</p></li>
+      <li data-reveal><i>03</i><h3 data-i18n="steps.s3">Отримайте консультацію</h3><p data-i18n="steps.s3p">Прайс-лист, технічні карти й підбір кольору — у Telegram-боті DVATONE або телефоном.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq light" id="faq">
+  <div class="wrap faq__grid">
+    <div class="faq__side">
+      <p class="label" data-reveal><b>07</b><span>FAQ</span></p>
+      <h2 class="h2" data-reveal data-i18n="faq.title">Питання <em>й відповіді</em></h2>
+      <p class="lede" data-reveal data-i18n="faq.lede">Не знайшли відповіді? Напишіть у Telegram-бот — консультант допоможе з вибором.</p>
+      <a class="link-arrow" data-reveal href="https://t.me/Dvatone_bot" target="_blank" rel="noopener"><span data-i18n="faq.ask">Поставити питання</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+    </div>
+    <div class="acc" id="acc">
+      <details class="acc__it" data-reveal open>
+        <summary><span data-i18n="faq.q1">Що таке мультиколорове покриття?</span><i aria-hidden="true"></i></summary>
+        <div class="acc__a"><p data-i18n="faq.a1">Це декоративне покриття, у якому частинки кількох кольорів розподілені по базовому тону й утворюють глибоку фактуру, схожу на природний камінь. Поверхня виглядає по-різному залежно від освітлення й відстані — саме це ми показуємо в каталозі та генераторі.</p></div>
+      </details>
+      <details class="acc__it" data-reveal>
+        <summary><span data-i18n="faq.q2">Наскільки колір на екрані відповідає реальному?</span><i aria-hidden="true"></i></summary>
+        <div class="acc__a"><p data-i18n="faq.a2">Екран передає характер фактури й співвідношення відтінків, але кожен дисплей відтворює колір по-своєму. Для остаточного рішення зверніться до консультанта — він допоможе з підбором кольору.</p></div>
+      </details>
+      <details class="acc__it" data-reveal>
+        <summary><span data-i18n="faq.q3">Де знайти технічні карти (TDS) і регламенти нанесення?</span><i aria-hidden="true"></i></summary>
+        <div class="acc__a"><p data-i18n="faq.a3">Технічні карти та регламенти доступні в Telegram-боті DVATONE, у розділі «TDS / Карти». Там же — відео-інструкція з нанесення.</p></div>
+      </details>
+      <details class="acc__it" data-reveal>
+        <summary><span data-i18n="faq.q4">Як дізнатися вартість?</span><i aria-hidden="true"></i></summary>
+        <div class="acc__a"><p data-i18n="faq.a4">Актуальний прайс-лист — у Telegram-боті DVATONE. Для розрахунку під конкретний об'єкт залиште запит на консультацію.</p></div>
+      </details>
+      <details class="acc__it" data-reveal>
+        <summary><span data-i18n="faq.q5">Чи можна підібрати індивідуальний колір?</span><i aria-hidden="true"></i></summary>
+        <div class="acc__a"><p data-i18n="faq.a5">Так. У боті є послуга «Підбір кольору»: консультант допоможе знайти відтінок або композицію під ваш інтер'єр.</p></div>
+      </details>
+      <details class="acc__it" data-reveal>
+        <summary><span data-i18n="faq.q6">Для яких поверхонь і приміщень підходить покриття?</span><i aria-hidden="true"></i></summary>
+        <div class="acc__a"><p data-i18n="faq.a6">Перелік основ, умови та порядок нанесення наведені в технічних картах. Консультант підкаже рішення саме для вашого об'єкта.</p></div>
+      </details>
+      <details class="acc__it" data-reveal>
+        <summary><span data-i18n="faq.q7">Чи працюєте ви з дизайнерами та архітекторами?</span><i aria-hidden="true"></i></summary>
+        <div class="acc__a"><p data-i18n="faq.a7">Так. Dvatone створений і для власників житла, і для професіоналів, які підбирають фініш для своїх клієнтів.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact dark" id="contact">
+  <div class="contact__tex" aria-hidden="true"><canvas id="contactCanvas"></canvas></div>
+  <div class="wrap contact__in">
+    <p class="label" data-reveal><b>08</b><span data-i18n="ct.label">Контакти</span></p>
+    <h2 class="contact__title" data-reveal data-i18n="ct.title">Обговорімо <em>ваш простір</em></h2>
+    <div class="contact__grid">
+      <a class="tg" href="https://t.me/Dvatone_bot" target="_blank" rel="noopener" data-reveal>
+        <span class="tg__k">Telegram</span>
+        <span class="tg__h">@Dvatone_bot</span>
+        <span class="tg__p" data-i18n="ct.tg">Уся екосистема DVATONE в одному чат-боті — миттєвий доступ до каталогу, прайс-листа та відеоінструкцій.</span>
+        <span class="tg__list">
+          <span data-i18n="ct.i1">Каталог</span><span data-i18n="ct.i2">Прайс-лист</span><span>TDS / <span data-i18n="ct.i3">Карти</span></span><span data-i18n="ct.i4">Галерея інтер'єрів</span><span data-i18n="ct.i5">Відео-інструкція</span><span data-i18n="ct.i6">Підбір кольору</span>
+        </span>
+        <span class="tg__go"><span data-i18n="ct.open">Відкрити бота</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+      </a>
+      <div class="contact__side" data-reveal>
+        <div class="cline">
+          <span class="cline__k" data-i18n="ct.phone">Телефон</span>
+          <a class="cline__v" href="tel:+380674036309">+38 (067) 403 63 09</a>
+        </div>
+        <div class="cline">
+          <span class="cline__k" data-i18n="ct.consult">Консультація</span>
+          <span class="cline__v cline__v--s" data-i18n="ct.consult_v">Підбір кольору та композиції під ваш об'єкт</span>
+        </div>
+        <div class="cline">
+          <span class="cline__k" data-i18n="ct.partner">Виробник-партнер</span>
+          <span class="cline__v cline__v--s">Dialcolor</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <img class="ftr__mark" src="img/logo-light.png" alt="DVATONE" width="720" height="123" loading="lazy">
+    <div class="ftr__row">
+      <span data-i18n="ft.rights">© 2026 DVATONE. Усі права захищено.</span>
+      <nav class="ftr__nav">
+        <a href="#collection" data-i18n="nav.collection">Колекція</a>
+        <a href="#generator" data-i18n="nav.generator">Генератор</a>
+        <a href="#interiors" data-i18n="nav.interiors">Інтер'єри</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <span class="ftr__credit"><span data-i18n="ft.concept">Концепт</span> — Artur Vasilyan, <a href="https://vasylian.com" target="_blank" rel="noopener">vasylian.com</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js" defer></script>
+</body>
+</html>
