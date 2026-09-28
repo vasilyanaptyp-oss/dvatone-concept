@@ -27,8 +27,7 @@
     { code: 'RAL 9018', sys: 'RAL', hex: 'C8CBC4' },
     { code: 'RAL 1015', sys: 'RAL', hex: 'E4D1B4' },
     { code: 'RAL 7038', sys: 'RAL', hex: 'AFB1A8' },
-    { code: 'S 4000-N', sys: 'NCS', hex: '999997' },
-    { code: 'RAL 1001', sys: 'RAL', hex: 'CFB084' }
+    { code: 'S 4000-N', sys: 'NCS', hex: '999997' }
   ];
   var BY_HEX = {};
   SHADES.forEach(function (s) { BY_HEX[s.hex] = s; });
@@ -47,8 +46,8 @@
   var EN = {
     'skip': 'Skip to content',
     'nav.collection': 'Collection', 'nav.generator': 'Generator', 'nav.interiors': 'Interiors', 'nav.video': 'Video', 'nav.contact': 'Contact', 'nav.cta': 'Consultation',
-    'hero.eyebrow': 'Architectural multicolor coatings',
-    'hero.t1': 'Shape your space', 'hero.t2': 'with <em>character</em>',
+    'hero.eyebrow': 'Multicolor coatings',
+    'hero.t1': 'Shape your space', 'hero.t2': 'with character',
     'hero.lede': 'Coatings where color has depth, texture and light. Choose a shade, compose your own blend and see it on the wall before it is applied.',
     'hero.cta1': 'Compose a finish', 'hero.cta2': 'Browse shades', 'hero.sample': 'Coating sample',
     'hero.m1n': '1,066', 'hero.m1': 'shades in the digital catalog', 'hero.m2': 'catalog color standards', 'hero.m3': 'manufacturing partner', 'hero.scroll': 'Scroll',
@@ -59,13 +58,13 @@
     'about.a1k': 'For homeowners', 'about.a1': 'The confidence to choose a finish you’ll love for years to come.',
     'about.a2k': 'For designers & architects', 'about.a2': 'A precise tool to source a finish for a client and show it in the space.',
     'strip.cap': 'Macro · real textures from the Dvatone catalog',
-    'col.label': 'Collection', 'col.title': 'Shades with <em>character</em>',
+    'col.label': 'Collection', 'col.title': 'Shades with <em>depth</em>',
     'col.lede': 'Every shade is a multi-tonal texture: a base color and countless micro-particles that catch the light in different ways.',
     'col.all': 'All', 'col.all_link': 'Full catalog — 1,066 shades', 'col.flag_k': 'Flagship', 'col.flag_cta': 'Create a similar blend',
-    'gen.label': 'Composition generator', 'gen.title': 'Compose your own <em>multicolor</em> finish',
+    'gen.label': 'Composition generator', 'gen.title': 'Compose your own <em>finish</em>',
     'gen.lede': 'Pick a base and 2–4 accent shades — the preview updates instantly. Try the result in an interior or send it to a consultant.',
     'gen.app': 'Generator', 'gen.wall': 'Wall', 'gen.macro': 'Macro', 'gen.id': 'Blend', 'gen.base': 'Base', 'gen.acc': 'Accents · 2–4',
-    'gen.density': 'Particle density', 'gen.grain': 'Grain size', 'gen.presets': 'Curated blends', 'gen.shuffle': 'Another blend',
+    'gen.density': 'Accent density', 'gen.grain': 'Grain size', 'gen.presets': 'Curated blends', 'gen.shuffle': 'Another blend',
     'gen.try': 'Try it in an interior', 'gen.send': 'Discuss with a consultant',
     'gen.note': 'Chips are real shades from the Dvatone catalog (NCS, 5051, RAL). The preview is generated live and conveys the character of the texture; confirm the final blend with a consultant.',
     'rooms.label': 'Interior visualization', 'rooms.title': 'Texture in the room, <em>not on a swatch</em>',
@@ -76,7 +75,7 @@
     'vid.lede': 'From catalog to finished wall: application, a tour of the collection and the generator at work — short and to the point.',
     'vid.tag': 'Video', 'vid.v1': 'Application process', 'vid.v1s': 'Video guide', 'vid.v2': 'Catalog overview', 'vid.v2s': 'Shade collection',
     'vid.v3': 'Generator: demo', 'vid.v3s': 'How to compose a blend', 'vid.soon': 'Your video goes here',
-    'steps.label': 'How to choose', 'steps.title': 'Three steps to a <em>confident</em> decision',
+    'steps.label': 'How to choose', 'steps.title': 'From shade <em>to wall</em>',
     'steps.s1': 'Choose a shade', 'steps.s1p': 'Browse the catalog and filter shades by color standard — NCS, 5051 or RAL.',
     'steps.s2': 'Compose a blend', 'steps.s2p': 'Combine a base with accents in the generator and try the result on a real interior wall.',
     'steps.s3': 'Get a consultation', 'steps.s3p': 'Price list, technical data sheets and color matching — in the DVATONE Telegram bot or by phone.',
@@ -102,9 +101,9 @@
     'ft.rights': '© 2026 DVATONE. All rights reserved.', 'ft.concept': 'Concept'
   };
   var T = {
-    uk: { tip: 'У генератор', add: 'Додати в генератор', blend: 'Склад', base: 'База', your: 'Ваша композиція', gen: 'Генератор', catTex: 'фактура каталогу',
+    uk: { tip: 'У генератор', add: 'Додати в генератор', blend: 'Пропорції прев’ю', base: 'База', your: 'Ваша композиція', gen: 'Генератор', catTex: 'фактура каталогу',
           title: 'DVATONE — Створіть простір з характером', desc: "DVATONE — архітектурні мультиколорові покриття від Dialcolor. Каталог відтінків, генератор композицій, візуалізація в інтер'єрі." },
-    en: { tip: 'To generator', add: 'Add to generator', blend: 'Blend', base: 'Base', your: 'Your blend', gen: 'Generator', catTex: 'catalog texture',
+    en: { tip: 'To generator', add: 'Add to generator', blend: 'Preview ratio', base: 'Base', your: 'Your blend', gen: 'Generator', catTex: 'catalog texture',
           title: 'DVATONE — Shape your space with character', desc: 'DVATONE — architectural multicolor coatings by Dialcolor. Shade catalog, composition generator, interior visualization.' }
   };
   var UK = {};
@@ -212,78 +211,128 @@
     x.putImageData(d, 0, 0); noiseTile = c; return c;
   }
 
+  /* integer hash + value noise (deterministic per seed) */
+  function h3(ix, iy, s) {
+    var h = (Math.imul(ix, 374761393) + Math.imul(iy, 668265263) + Math.imul(s, 1442695041)) | 0;
+    h = Math.imul(h ^ (h >>> 13), 1274126177); h ^= h >>> 16;
+    return (h >>> 0) / 4294967296;
+  }
+  function vnoise(x, y, s) {
+    var ix = Math.floor(x), iy = Math.floor(y), fx = x - ix, fy = y - iy;
+    fx = fx * fx * (3 - 2 * fx); fy = fy * fy * (3 - 2 * fy);
+    var a = h3(ix, iy, s), b = h3(ix + 1, iy, s), c = h3(ix, iy + 1, s), d = h3(ix + 1, iy + 1, s);
+    return a + (b - a) * fx + (c - a) * fy + (a - b - c + d) * fx * fy;
+  }
+  /* share of accent granules for a density value (also drives the legend) */
+  function accShare(den) { return 0.3 + 0.5 * den; }
+
   /**
    * paint(ctx, W, H, {base, acc[], density 0..1, grain, scale, seed, mottle})
+   * Densely packed granules (jittered Voronoi mosaic), clustered by low-frequency
+   * noise, with soft seams and a hint of relief — reads like a sprayed
+   * multicolor finish rather than terrazzo chips.
    */
   function paint(ctx, W, H, o) {
-    var R = rng(o.seed || 1), b = hx(o.base), acc = o.acc || [];
+    var seed = (o.seed || 1) | 0, b = hx(o.base), acc = o.acc || [];
+    var den = o.density == null ? 0.6 : o.density, gr = o.grain || 1;
+    var cellFull = Math.max(1.6, Math.sqrt(W * H) / 900 * 3.1 * (o.scale || 1) * gr);
+    var q = Math.max(0.6, Math.min(1, 4.2 / cellFull));
+    var w = Math.max(8, Math.round(W * q)), h = Math.max(8, Math.round(H * q)), cell = cellFull * q;
+
+    // palette: base tones + accents in three tones + a trace of dark mineral
+    var aS = acc.length ? accShare(den) : 0, bS = 1 - aS;
+    var base = [{ c: tone(b, -0.1), w: 0.3 }, { c: b, w: 0.45 }, { c: tone(b, 0.08), w: 0.25 }];
+    var accs = acc.map(function (hh) { var a = hx(hh); return [{ c: tone(a, -0.14), w: 0.3 }, { c: a, w: 0.45 }, { c: tone(a, 0.1), w: 0.25 }]; });
+    var dark = tone(b, -0.5);
+
+    var cols = Math.ceil(w / cell) + 3, rows = Math.ceil(h / cell) + 3, n = cols * rows;
+    var PX = new Float32Array(n), PY = new Float32Array(n), CR = new Float32Array(n), CG = new Float32Array(n), CB = new Float32Array(n), FAM = new Uint8Array(n), RW = new Float32Array(n);
+    var clump = 2.6;
+    for (var j = 0; j < rows; j++) {
+      for (var i = 0; i < cols; i++) {
+        var gi = i - 1, gj = j - 1, k = j * cols + i;
+        PX[k] = (gi + 0.1 + 0.8 * h3(gi, gj, seed)) * cell;
+        PY[k] = (gj + 0.1 + 0.8 * h3(gi, gj, seed + 17)) * cell;
+        var gs = 0.62 + 0.76 * h3(gi, gj, seed + 83); RW[k] = 1 / (gs * gs); // weighted cells -> rounded, varied grains
+        // colour family: base vs accents, clustered by noise so neighbours merge into organic grains
+        var u = h3(gi, gj, seed + 31), c = null, t, famId = 0;
+        if (u < 0.014) { c = dark; famId = 250; }
+        else {
+          var nb = vnoise(gi / clump, gj / clump, seed + 7);
+          var ws = [bS * (0.35 + 1.3 * nb * nb)], tot = ws[0];
+          for (var a = 0; a < accs.length; a++) {
+            var na = vnoise(gi / clump, gj / clump, seed + 101 * (a + 1));
+            var wa = aS / accs.length * (0.12 + 1.9 * na * na);
+            ws.push(wa); tot += wa;
+          }
+          var v = h3(gi, gj, seed + 47) * tot, f = 0;
+          while (f < ws.length - 1 && v > ws[f]) { v -= ws[f]; f++; }
+          var fam = f === 0 ? base : accs[f - 1], tv = vnoise(gi / 1.8, gj / 1.8, seed + 59 + f), s = 0;
+          while (s < fam.length - 1 && tv > fam[s].w) { tv -= fam[s].w; s++; }
+          c = fam[s].c; famId = f;
+        }
+        t = 1 + (h3(gi, gj, seed + 71) - 0.5) * 0.05;
+        CR[k] = c[0] * t; CG[k] = c[1] * t; CB[k] = c[2] * t; FAM[k] = famId;
+      }
+    }
+    var img = new ImageData(w, h), D = img.data, inv = 1 / cell, seam = 1 / (0.38 * cell), relief = o.relief == null ? 0.03 : o.relief;
+    for (var y = 0; y < h; y++) {
+      var cy = Math.floor(y * inv) + 1;
+      for (var x = 0; x < w; x++) {
+        var cx = Math.floor(x * inv) + 1, f1 = 1e9, f2 = 1e9, bi = 0, b2 = 0;
+        for (var dj = -1; dj <= 1; dj++) {
+          var row = (cy + dj) * cols;
+          for (var di = -1; di <= 1; di++) {
+            var kk = row + cx + di, dx = PX[kk] - x, dy = PY[kk] - y, dd = (dx * dx + dy * dy) * RW[kk];
+            if (dd < f1) { f2 = f1; b2 = bi; f1 = dd; bi = kk; } else if (dd < f2) { f2 = dd; b2 = kk; }
+          }
+        }
+        var sh = 1;
+        if (FAM[bi] !== FAM[b2]) { var e = (Math.sqrt(f2) - Math.sqrt(f1)) * seam; if (e > 1) e = 1; sh = 0.86 + 0.14 * e; }
+        sh *= 1 + ((PX[bi] - x) + (PY[bi] - y)) * inv * relief;
+        var p = (y * w + x) * 4;
+        D[p] = CR[bi] * sh; D[p + 1] = CG[bi] * sh; D[p + 2] = CB[bi] * sh; D[p + 3] = 255;
+      }
+    }
     ctx.save();
-    ctx.globalCompositeOperation = 'source-over';
+    ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1;
+    var tmp = document.createElement('canvas'); tmp.width = w; tmp.height = h;
+    tmp.getContext('2d').putImageData(img, 0, 0);
     ctx.fillStyle = css(b); ctx.fillRect(0, 0, W, H);
-    // soft tonal mottling of the base coat
-    var mot = o.mottle == null ? 14 : o.mottle;
+    ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+    if ('filter' in ctx) ctx.filter = 'blur(' + (0.18 * cellFull).toFixed(2) + 'px)';
+    ctx.drawImage(tmp, 0, 0, W, H);
+    ctx.filter = 'none';
+    // soft tonal mottling (uneven spray / light)
+    var R = rng(seed), mot = o.mottle == null ? 10 : o.mottle;
     for (var m = 0; m < mot; m++) {
-      var mx = R() * W, my = R() * H, mr = (0.12 + R() * 0.32) * Math.max(W, H);
-      var mc = tone(b, R() < 0.5 ? -0.1 : 0.07), g = ctx.createRadialGradient(mx, my, 0, mx, my, mr);
-      g.addColorStop(0, css(mc, 0.32)); g.addColorStop(1, css(mc, 0));
+      var mx = R() * W, my = R() * H, mr = (0.15 + R() * 0.35) * Math.max(W, H);
+      var mc = tone(b, R() < 0.5 ? -0.12 : 0.08), g = ctx.createRadialGradient(mx, my, 0, mx, my, mr);
+      g.addColorStop(0, css(mc, 0.16)); g.addColorStop(1, css(mc, 0));
       ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
     }
-    // flake palette: base tonal variants + each accent in 3 tones + mineral dark + light spark
-    var pal = [
-      { c: tone(b, -0.36), w: 0.12 }, { c: tone(b, -0.16), w: 0.12 }, { c: tone(b, 0.16), w: 0.08 }
-    ];
-    var share = acc.length ? 0.62 / acc.length : 0;
-    acc.forEach(function (h) { var a = hx(h); pal.push({ c: tone(a, -0.34), w: share * 0.34 }, { c: a, w: share * 0.44 }, { c: tone(a, 0.18), w: share * 0.22 }); });
-    pal.push({ c: [44, 38, 32], w: 0.016 });
-    if (o.spark !== false) pal.push({ c: [250, 246, 238], w: 0.004 });
-    var tot = 0; pal.forEach(function (p) { tot += p.w; });
-    var cum = [], acc2 = 0; pal.forEach(function (p) { acc2 += p.w / tot; cum.push(acc2); });
-    var paths = pal.map(function () { return new Path2D(); });
-
-    var unit = Math.sqrt(W * H) / 900 * (o.scale || 1);
-    var gr = o.grain || 1, den = o.density == null ? 0.6 : o.density;
-    var N = Math.min(170000, Math.round(W * H * coverC(den) / (unit * unit * gr * gr)));
-    for (var i = 0; i < N; i++) {
-      var u = R(), k = 0; while (k < cum.length - 1 && u > cum[k]) k++;
-      var p = paths[k], x = R() * W, y = R() * H;
-      var r = unit * gr * (0.5 + Math.pow(R(), 2.7) * 3.6);
-      var n = 5 + (R() * 3 | 0), a0 = R() * 6.283;
-      for (var j = 0; j < n; j++) {
-        var ang = a0 + j / n * 6.283 + (R() - 0.5) * 0.9, rr = r * (0.5 + R() * 0.65);
-        var px = x + Math.cos(ang) * rr, py = y + Math.sin(ang) * rr * (0.75 + R() * 0.3);
-        if (j === 0) p.moveTo(px, py); else p.lineTo(px, py);
-      }
-      p.closePath();
-    }
-    // draw darker/base variants first, sparks last
-    var order = pal.map(function (_, idx) { return idx; });
-    order.sort(function (a, c) { return lum(pal[a].c) - lum(pal[c].c); });
-    order.forEach(function (idx) { ctx.fillStyle = css(pal[idx].c); ctx.fill(paths[idx]); });
     // micro grain
     ctx.globalCompositeOperation = 'soft-light';
-    ctx.globalAlpha = 0.55;
+    ctx.globalAlpha = 0.32;
     ctx.fillStyle = ctx.createPattern(getNoise(), 'repeat');
     ctx.fillRect(0, 0, W, H);
     ctx.restore();
   }
-  function coverC(den) { return 0.06 + 0.16 * den; }
-  function coverage(den) { return 1 - Math.exp(-5.6 * coverC(den)); }
-  function lum(c) { return c[0] * 0.299 + c[1] * 0.587 + c[2] * 0.114; }
 
   /* =====================================================
      Collection
      ===================================================== */
   var cardsEl = $('#cards'), curFilter = 'all';
-  var CARD_SET = ['B7B3A8', 'B8A389', 'C5866E', '90A488', 'B4986D', '819BAD', '9F9287', 'B87C7E', 'BA9377', 'E1D2CA', 'C8CBC4', 'B6A277', '989492', 'E4D1B4', '999997', 'AFB1A8', 'CFB084'];
+  var CARD_SET = ['B7B3A8', 'B8A389', 'C5866E', '90A488', 'B4986D', '819BAD', '9F9287', 'B87C7E', 'BA9377', 'E1D2CA', 'C8CBC4', 'B6A277', '989492', 'E4D1B4', '999997', 'AFB1A8'];
   function renderCards() {
     if (!cardsEl) return;
     var html = '';
     var list = CARD_SET.map(function (h) { return BY_HEX[h]; }).filter(function (s) { return curFilter === 'all' || s.sys === curFilter; });
-    if (curFilter === 'all') list = list.slice(0, 12);
+    if (curFilter === 'all') list = list.slice(0, 8);
     list.forEach(function (s) {
       html += '<article class="card">' +
         '<div class="card__img"><img src="img/tex/' + s.hex + '.webp" alt="' + fullCode(s) + '" loading="lazy" width="900" height="600"><span class="card__tip">' + T[lang].tip + '</span></div>' +
-        '<div class="card__b"><div class="card__code"><b>' + (s.sys === 'NCS' ? 'NCS ' : '') + s.code + '</b><small><i style="background:#' + s.hex + '"></i>' + s.sys + ' · #' + s.hex + '</small></div>' +
+        '<div class="card__b"><div class="card__code"><b>' + (s.sys === 'NCS' ? 'NCS ' : '') + s.code + '</b><small><i style="background:#' + s.hex + '"></i>' + s.sys + '</small></div>' +
         '<button type="button" class="card__add" data-hex="' + s.hex + '" aria-label="' + T[lang].add + ': ' + fullCode(s) + '"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button></div>' +
         '</article>';
     });
@@ -347,8 +396,7 @@
     var key = G.base + G.acc.join('') + G.density + G.grain;
     $('#compId').textContent = '#' + (hashStr(key) >>> 0).toString(16).slice(-4).toUpperCase();
     // legend + ratio
-    var cov = coverage(G.density);
-    var basePct = Math.round(100 * (0.33 * cov + (1 - cov)));
+    var basePct = Math.round(100 * (1 - accShare(G.density)));
     var rest = 100 - basePct, each = G.acc.length ? rest / G.acc.length : 0;
     var lg = '<span class="lg-h">' + T[lang].blend + '</span>' +
       '<div><i style="background:#' + G.base + '"></i><span>' + T[lang].base + ' · ' + fullCode(BY_HEX[G.base]) + '</span><b>' + basePct + '%</b></div>';
@@ -372,13 +420,27 @@
     var ctx = genCanvas.getContext('2d');
     paint(ctx, genCanvas.width, genCanvas.height, { base: G.base, acc: G.acc, density: G.density, grain: G.grain, scale: G.scale === 'macro' ? 2.8 : 1.2, seed: G.seed });
     genDirty = false;
+    genThumbs();
+  }
+  /* small round previews of the current blend, cropped from the live preview canvas */
+  function genThumbs() {
+    if (!genCanvas || genCanvas.width < 8) return;
+    $$('#roomChips canvas.th, #roomNow canvas.th').forEach(function (c) {
+      var x = c.getContext('2d'), s = Math.min(genCanvas.width, genCanvas.height) * 0.3;
+      x.clearRect(0, 0, c.width, c.height);
+      x.drawImage(genCanvas, (genCanvas.width - s) / 2, (genCanvas.height - s) / 2, s, s, 0, 0, c.width, c.height);
+    });
   }
   function genChanged() {
     updateGenUI(); genDirty = true; genTexCache = null;
     if (!rafId) rafId = requestAnimationFrame(function () { rafId = 0; drawGen(); });
-    if (ROOM.finish && ROOM.finish.type === 'gen') { ROOM.cache = {}; drawRoom(); }
-    renderRoomChips();
+    if (ROOM.finish && ROOM.finish.type === 'gen') {
+      ROOM.cache = {};
+      clearTimeout(roomGenT); roomGenT = setTimeout(drawRoom, 160);
+      updateRoomNow();
+    }
   }
+  var roomGenT = 0;
   function applyPreset(p) { G.base = p.base; G.acc = p.acc.slice(); G.seed = hashStr(p.id) % 99991; genChanged(); }
   function renderPresets() {
     var el = $('#presets'); if (!el) return;
@@ -441,13 +503,23 @@
     imgCache[src] = new Promise(function (res, rej) { var im = new Image(); im.decoding = 'async'; im.onload = function () { res(im); }; im.onerror = rej; im.src = src; });
     return imgCache[src];
   }
-  function mirrorTile(src, tw, th) {
-    var c = document.createElement('canvas'); c.width = Math.round(tw * 2); c.height = Math.round(th * 2);
-    var x = c.getContext('2d');
-    x.drawImage(src, 0, 0, tw, th);
-    x.save(); x.translate(tw * 2, 0); x.scale(-1, 1); x.drawImage(src, 0, 0, tw, th); x.restore();
-    x.save(); x.translate(0, th * 2); x.scale(1, -1); x.drawImage(src, 0, 0, tw, th); x.restore();
-    x.save(); x.translate(tw * 2, th * 2); x.scale(-1, -1); x.drawImage(src, 0, 0, tw, th); x.restore();
+  /* seamless tile without mirror symmetry: the texture blended over a half-offset copy of itself */
+  function seamlessTile(src, tw, th) {
+    tw = Math.round(tw); th = Math.round(th);
+    var c = document.createElement('canvas'); c.width = tw; c.height = th;
+    var x = c.getContext('2d'), hw = tw / 2, hh = th / 2;
+    // half-offset copy (its edges are continuous when repeated)
+    x.drawImage(src, -hw, -hh, tw, th); x.drawImage(src, hw, -hh, tw, th);
+    x.drawImage(src, -hw, hh, tw, th); x.drawImage(src, hw, hh, tw, th);
+    // original on top, feathered towards the edges
+    var a = document.createElement('canvas'); a.width = tw; a.height = th;
+    var ax = a.getContext('2d'); ax.drawImage(src, 0, 0, tw, th);
+    ax.globalCompositeOperation = 'destination-in';
+    ax.save(); ax.translate(hw, hh); ax.scale(1, th / tw);
+    var g = ax.createRadialGradient(0, 0, 0, 0, 0, hw);
+    g.addColorStop(0, 'rgba(0,0,0,1)'); g.addColorStop(0.62, 'rgba(0,0,0,1)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+    ax.fillStyle = g; ax.fillRect(-hw, -hw, tw, tw); ax.restore();
+    x.drawImage(a, 0, 0);
     return c;
   }
   var genTexCache = null;
@@ -468,7 +540,7 @@
       var off = document.createElement('canvas'); off.width = W; off.height = H;
       var o = off.getContext('2d');
       var tw = W * R.tile, th = tw * (tex.height || tex.naturalHeight) / (tex.width || tex.naturalWidth);
-      var tile = mirrorTile(tex, tw, th);
+      var tile = seamlessTile(tex, tw, th);
       for (var y = 0; y < H; y += tile.height) for (var x = 0; x < W; x += tile.width) o.drawImage(tile, x, y);
       o.globalCompositeOperation = 'multiply'; o.drawImage(mask, 0, 0, W, H);
       o.globalCompositeOperation = 'destination-in'; o.drawImage(mask, 0, 0, W, H);
@@ -503,17 +575,16 @@
     }).join('');
     h += '<button type="button" class="rchip rchip--gen' + (ROOM.finish.type === 'gen' ? ' is-on' : '') + '" data-gen="1"><canvas class="th" width="64" height="64"></canvas>' + T[lang].your + '</button>';
     el.innerHTML = h;
-    var th = el.querySelector('canvas.th');
-    if (th) { var gx = th.getContext('2d'); gx.save(); gx.beginPath(); gx.arc(32, 32, 32, 0, 6.283); gx.clip(); gx.drawImage(genTexture(), 300, 200, 300, 200, 0, 0, 96, 64); gx.restore(); }
+    genThumbs();
   }
   function updateRoomNow() {
     var el = $('#roomNow'); if (!el) return;
     if (ROOM.finish.type === 'gen') {
       el.innerHTML = '<canvas class="th" width="72" height="72" style="border-radius:50%"></canvas><div><b>' + T[lang].your + '</b><small>' + T[lang].gen + ' · ' + $('#compId').textContent + '</small></div>';
-      var c = el.querySelector('canvas'); c.getContext('2d').drawImage(genTexture(), 300, 200, 200, 200, 0, 0, 72, 72);
+      genThumbs();
     } else {
       var s = BY_HEX[ROOM.finish.hex];
-      el.innerHTML = '<span class="th" style="background-image:url(img/tex/' + s.hex + '.webp)"></span><div><b>' + fullCode(s) + '</b><small>' + s.sys + ' · #' + s.hex + ' · ' + T[lang].catTex + '</small></div>';
+      el.innerHTML = '<span class="th" style="background-image:url(img/tex/' + s.hex + '.webp)"></span><div><b>' + fullCode(s) + '</b><small>' + T[lang].catTex + '</small></div>';
     }
   }
   if (roomCanvas) {
@@ -578,11 +649,6 @@
       x.drawImage(im, dx, dy, dw, dh); x.drawImage(off, dx, dy, dw, dh);
     }).catch(function () {});
   }
-  function drawContact() {
-    var cc = $('#contactCanvas'); if (!cc) return;
-    sizeCanvas(cc, 1600);
-    paint(cc.getContext('2d'), cc.width, cc.height, { base: '1a1714', acc: ['2a241f', '3b332b', '5e4a30'], density: 0.5, grain: 1.2, scale: 1.4, seed: 21, mottle: 6, spark: false });
-  }
 
   /* =====================================================
      Boot
@@ -599,7 +665,7 @@
   initReveal();
   drawGen();
   renderRoomChips(); updateRoomNow(); drawRoom();
-  drawPoster(); drawContact(); drawPosterRoom();
+  drawPoster(); drawPosterRoom();
 
   var rT = 0, lastW = window.innerWidth;
   window.addEventListener('resize', function () {
@@ -607,7 +673,7 @@
     rT = setTimeout(function () {
       if (Math.abs(window.innerWidth - lastW) < 2) return; // ignore mobile URL-bar height changes
       lastW = window.innerWidth;
-      drawGen(); drawRoom(); drawPoster(); drawContact(); drawPosterRoom();
+      drawGen(); drawRoom(); drawPoster(); drawPosterRoom();
     }, 180);
   });
 })();
