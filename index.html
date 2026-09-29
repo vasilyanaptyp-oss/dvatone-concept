@@ -292,9 +292,11 @@
       <div class="rooms__stage" id="roomStage">
         <canvas id="roomCanvas" role="img" aria-label="Interior visualization"></canvas>
         <div class="split" id="split" aria-hidden="true"><span class="split__h"><svg viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>
-        <span class="rooms__badge" data-i18n="rooms.badge">Візуалізація</span>
-        <span class="rooms__ba rooms__ba--l" data-i18n="rooms.after">З покриттям</span>
-        <span class="rooms__ba rooms__ba--r" data-i18n="rooms.before">Оригінал</span>
+        <div class="rooms__hud">
+          <span class="rooms__badge" data-i18n="rooms.badge">Візуалізація</span>
+          <span class="rooms__ba rooms__ba--l" data-i18n="rooms.after">З покриттям</span>
+          <span class="rooms__ba rooms__ba--r" data-i18n="rooms.before">Оригінал</span>
+        </div>
         <div class="rooms__now" id="roomNow"></div>
       </div>
       <div class="rooms__chips" id="roomChips"></div>

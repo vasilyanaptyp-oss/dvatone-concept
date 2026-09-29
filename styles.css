@@ -464,14 +464,15 @@ em{font-style:normal}
 .rooms__stage{position:relative;aspect-ratio:16/9.2;overflow:hidden;background:#d9d3c9;touch-action:pan-y;cursor:ew-resize;user-select:none;-webkit-user-select:none}
 .rooms__stage>canvas{position:absolute;inset:0;width:100%;height:100%}
 .split{position:absolute;top:0;bottom:0;left:var(--x,50%);width:1px;background:rgba(255,255,255,.9);box-shadow:0 0 0 .5px rgba(0,0,0,.08);z-index:2;pointer-events:none}
-.split__h{position:absolute;top:50%;left:50%;width:48px;height:48px;margin:-24px 0 0 -24px;border-radius:50%;background:rgba(247,244,239,.92);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:grid;place-items:center;box-shadow:0 10px 30px -8px rgba(0,0,0,.35);color:var(--tl)}
+.split__h{position:absolute;top:50%;left:50%;width:48px;height:48px;margin:-24px 0 0 -24px;transform:translateX(var(--hx,0px));border-radius:50%;background:rgba(247,244,239,.92);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:grid;place-items:center;box-shadow:0 10px 30px -8px rgba(0,0,0,.35);color:var(--tl)}
 .split__h svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.4}
-.rooms__badge,.rooms__ba{position:absolute;z-index:3;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:8px 11px;background:rgba(247,244,239,.84);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--tl);pointer-events:none}
-.rooms__badge{left:16px;top:16px;display:flex;align-items:center;gap:8px}
+.rooms__hud{position:absolute;z-index:3;left:16px;right:16px;top:16px;display:grid;grid-template-columns:auto auto 1fr auto;align-items:start;gap:8px;pointer-events:none}
+.rooms__badge,.rooms__ba{font-size:10px;font-weight:600;letter-spacing:.16em;line-height:1.3;text-transform:uppercase;white-space:nowrap;padding:8px 11px;background:rgba(247,244,239,.84);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--tl);pointer-events:none}
+.rooms__badge{display:flex;align-items:center;gap:8px}
 .rooms__badge::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--brass-l)}
-.rooms__ba{top:16px}
-.rooms__ba--l{left:50%;transform:translateX(calc(-100% - 12px));left:var(--x,50%)}
-.rooms__ba--r{left:calc(var(--x,50%) + 12px)}
+.rooms__ba{transition:opacity .28s var(--ease)}
+.rooms__ba--r{grid-column:4}
+.rooms__ba.is-off{opacity:0}
 .rooms__now{position:absolute;right:16px;bottom:16px;z-index:3;display:flex;align-items:center;gap:12px;padding:10px 14px 10px 10px;background:rgba(247,244,239,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--tl);pointer-events:none}
 .rooms__now .th{display:block;flex:none;width:36px;height:36px;border-radius:50%;background-size:cover;background-position:center;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
 .rooms__now b{display:block;font-weight:500;font-size:14px;line-height:1.2;white-space:nowrap}
@@ -688,8 +689,10 @@ a.cline__v:hover{color:var(--brass-2)}
   .skyctl.is-mini .skyctl__pill{padding:0 8.5px}
   .gen .sec-head{margin-bottom:36px}
   .rooms__now{right:10px;bottom:10px;left:10px}
-  .rooms__ba{top:48px}
-  .rooms__badge{left:10px;top:10px}
+  .rooms__hud{left:10px;right:10px;top:10px;grid-template-columns:auto 1fr auto;row-gap:6px}
+  .rooms__badge{grid-column:1 / -1;justify-self:start}
+  .rooms__ba--l{grid-column:1}
+  .rooms__ba--r{grid-column:3}
   .vgrid{grid-template-columns:1fr}
   .vcard,.vcard--xl{aspect-ratio:16/11}
   .steps__list{grid-template-columns:1fr}

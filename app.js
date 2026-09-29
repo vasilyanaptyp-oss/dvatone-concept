@@ -699,11 +699,12 @@
   }
   var roomGenT = 0;
   function genChanged(opt) {
-    updateGenUI(opt && opt.draft); genTexCache = null;
+    updateGenUI(opt && opt.draft);
     requestDraw(opt && opt.draft);
+    // cached renders of the blend are keyed by its recipe, so a changed blend never shows a stale room
+    dropGenCache();
     if (ROOM.finish && ROOM.finish.type === 'gen') {
-      ROOM.cache = {};
-      clearTimeout(roomGenT); roomGenT = setTimeout(drawRoom, 260);
+      clearTimeout(roomGenT); roomGenT = setTimeout(drawRoom, opt && opt.draft ? 320 : 60);
       updateRoomNow();
     }
   }
@@ -849,7 +850,7 @@
       if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(txt).then(done, fallback); else fallback();
     });
     $('#toRoom').addEventListener('click', function () {
-      ROOM.finish = { type: 'gen' }; ROOM.cache = {}; renderRoomChips(); drawRoom(); updateRoomNow();
+      ROOM.finish = { type: 'gen' }; renderRoomChips(); drawRoom(); updateRoomNow();
       document.getElementById('interiors').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
     });
     if ('IntersectionObserver' in window) {
@@ -882,79 +883,148 @@
      Interiors — wall visualizer (mask + shading map)
      ===================================================== */
   var ROOMS = {
-    d: { img: 'img/rooms/room-d.jpg', mask: 'img/rooms/room-d-mask.webp', fx: 0.55, fy: 0.55, tile: 0.36 },
-    a: { img: 'img/rooms/room-a.jpg', mask: 'img/rooms/room-a-mask.webp', fx: 0.78, fy: 0.5, tile: 0.34 },
-    c: { img: 'img/rooms/room-c.jpg', mask: 'img/rooms/room-c-mask.webp', fx: 0.5, fy: 0.5, tile: 0.34 }
+    d: { img: 'img/rooms/room-d.jpg', mask: 'img/rooms/room-d-mask.webp', edge: 'img/rooms/room-d-edge.webp', fx: 0.55, fy: 0.55, tile: 0.36 },
+    a: { img: 'img/rooms/room-a.jpg', mask: 'img/rooms/room-a-mask.webp', edge: 'img/rooms/room-a-edge.webp', fx: 0.78, fy: 0.5, tile: 0.34 },
+    c: { img: 'img/rooms/room-c.jpg', mask: 'img/rooms/room-c-mask.webp', edge: 'img/rooms/room-c-edge.webp', fx: 0.5, fy: 0.5, tile: 0.34 }
   };
+  /* mask RGB = light on the wall, measured from the photo itself (255 = SHADE_GAIN x the chosen shade);
+     mask alpha = coated area; edge layer = object edges with the old wall colour taken out (no halo) */
+  var SHADE_GAIN = 1.3;
   var FINISHES = ['B8A389', 'B7B3A8', 'B4986D', 'C5866E', '90A488', '819BAD', '9F9287'];
-  var ROOM = { id: 'd', finish: { type: 'tex', hex: 'B8A389' }, split: 0.56, cache: {} };
+  var ROOM = { id: 'd', finish: { type: 'tex', hex: 'B8A389' }, split: 0.56, cache: {}, order: [] };
   var roomCanvas = $('#roomCanvas'), roomStage = $('#roomStage');
   var imgCache = {};
   function loadImg(src) {
     if (imgCache[src]) return imgCache[src];
-    imgCache[src] = new Promise(function (res, rej) { var im = new Image(); im.decoding = 'async'; im.onload = function () { res(im); }; im.onerror = rej; im.src = src; });
+    imgCache[src] = new Promise(function (res, rej) { var im = new Image(); im.decoding = 'async'; im.onload = function () { res(im); }; im.onerror = function (e) { delete imgCache[src]; rej(e); }; im.src = src; });
     return imgCache[src];
   }
-  /* seamless tile without mirror symmetry: the texture blended over a half-offset copy of itself */
+  /* seamless tile without mirror symmetry and without visible seams: the texture is cross-faded with a
+     half-offset copy of itself, first across x, then across y. The blend keeps the grain contrast
+     (variance-preserving weights), so the cross-fade zones do not read as a softer grid on the wall. */
   function seamlessTile(src, tw, th) {
-    tw = Math.round(tw); th = Math.round(th);
+    tw = Math.max(8, Math.round(tw)); th = Math.max(8, Math.round(th));
     var c = document.createElement('canvas'); c.width = tw; c.height = th;
-    var x = c.getContext('2d'), hw = tw / 2, hh = th / 2;
-    x.drawImage(src, -hw, -hh, tw, th); x.drawImage(src, hw, -hh, tw, th);
-    x.drawImage(src, -hw, hh, tw, th); x.drawImage(src, hw, hh, tw, th);
-    var a = document.createElement('canvas'); a.width = tw; a.height = th;
-    var ax = a.getContext('2d'); ax.drawImage(src, 0, 0, tw, th);
-    ax.globalCompositeOperation = 'destination-in';
-    ax.save(); ax.translate(hw, hh); ax.scale(1, th / tw);
-    var g = ax.createRadialGradient(0, 0, 0, 0, 0, hw);
-    g.addColorStop(0, 'rgba(0,0,0,1)'); g.addColorStop(0.62, 'rgba(0,0,0,1)'); g.addColorStop(1, 'rgba(0,0,0,0)');
-    ax.fillStyle = g; ax.fillRect(-hw, -hw, tw, tw); ax.restore();
-    x.drawImage(a, 0, 0);
+    var x = c.getContext('2d');
+    x.imageSmoothingEnabled = true; x.imageSmoothingQuality = 'high';
+    x.drawImage(src, 0, 0, tw, th);
+    var img;
+    try { img = x.getImageData(0, 0, tw, th); } catch (e) { return c; }
+    var p = img.data, n = tw * th, mr = 0, mg = 0, mb = 0, i, j, k;
+    for (k = 0; k < n; k++) { mr += p[k * 4]; mg += p[k * 4 + 1]; mb += p[k * 4 + 2]; }
+    mr /= n; mg /= n; mb /= n;
+    var A = new Float32Array(n * 3), B = new Float32Array(n * 3);
+    for (k = 0; k < n; k++) { A[k * 3] = p[k * 4] - mr; A[k * 3 + 1] = p[k * 4 + 1] - mg; A[k * 3 + 2] = p[k * 4 + 2] - mb; }
+    function wts(len) {
+      var w = new Float32Array(len * 2);
+      for (var q = 0; q < len; q++) {
+        var t = 1 - Math.abs(2 * (q + 0.5) / len - 1); t = t * t * (3 - 2 * t);
+        var u = 1 - t, nn = 1 / Math.sqrt(t * t + u * u);
+        w[q * 2] = t * nn; w[q * 2 + 1] = u * nn;
+      }
+      return w;
+    }
+    var wx = wts(tw), wy = wts(th), hw = tw >> 1, hh = th >> 1;
+    for (j = 0; j < th; j++) for (i = 0; i < tw; i++) {
+      var o = (j * tw + i) * 3, s2 = (j * tw + (i + hw) % tw) * 3, a = wx[i * 2], b = wx[i * 2 + 1];
+      B[o] = A[o] * a + A[s2] * b; B[o + 1] = A[o + 1] * a + A[s2 + 1] * b; B[o + 2] = A[o + 2] * a + A[s2 + 2] * b;
+    }
+    for (j = 0; j < th; j++) {
+      var a2 = wy[j * 2], b2 = wy[j * 2 + 1], js = ((j + hh) % th) * tw;
+      for (i = 0; i < tw; i++) {
+        var o2 = (j * tw + i) * 3, s3 = (js + i) * 3, d = (j * tw + i) * 4;
+        p[d] = mr + B[o2] * a2 + B[s3] * b2; p[d + 1] = mg + B[o2 + 1] * a2 + B[s3 + 1] * b2; p[d + 2] = mb + B[o2 + 2] * a2 + B[s3 + 2] * b2; p[d + 3] = 255;
+      }
+    }
+    x.putImageData(img, 0, 0);
     return c;
   }
-  var genTexCache = null;
+  /* the generator blend as a wall texture: same grain size on the wall as the catalogue textures,
+     no large mottling (it would repeat from tile to tile) */
+  var genTexCache = null, genTexKey = '';
+  function genKey() { return compKey() + '|' + G.seed; }
   function genTexture() {
-    if (genTexCache) return genTexCache;
+    var k = genKey();
+    if (genTexCache && genTexKey === k) return genTexCache;
     var c = document.createElement('canvas'); c.width = 900; c.height = 600;
-    paint(c.getContext('2d'), 900, 600, paintOpts({ scale: 1.25, mottle: 8 }));
-    genTexCache = c; return c;
+    paint(c.getContext('2d'), 900, 600, paintOpts({ scale: 0.72, mottle: 0 }));
+    genTexCache = c; genTexKey = k; return c;
+  }
+  function finishKey(f) { return f.type === 'gen' ? 'gen:' + genKey() : f.hex; }
+  function dropGenCache() {
+    Object.keys(ROOM.cache).forEach(function (k) { if (k.indexOf('|gen:') > -1) delete ROOM.cache[k]; });
+    ROOM.order = ROOM.order.filter(function (k) { return !!ROOM.cache[k]; });
   }
   function coated(roomId, finish) {
-    var key = roomId + '|' + (finish.type === 'gen' ? 'gen' : finish.hex);
+    var key = roomId + '|' + finishKey(finish);
     if (ROOM.cache[key]) return Promise.resolve(ROOM.cache[key]);
     var R = ROOMS[roomId];
     var texP = finish.type === 'gen' ? Promise.resolve(genTexture()) : loadImg('img/tex/' + finish.hex + '.webp');
-    return Promise.all([loadImg(R.img), loadImg(R.mask), texP]).then(function (r) {
-      var im = r[0], mask = r[1], tex = r[2];
+    return Promise.all([loadImg(R.img), loadImg(R.mask), loadImg(R.edge), texP]).then(function (r) {
+      if (ROOM.cache[key]) return ROOM.cache[key];
+      var im = r[0], mask = r[1], edge = r[2], tex = r[3];
       var W = im.naturalWidth, H = im.naturalHeight;
       var off = document.createElement('canvas'); off.width = W; off.height = H;
       var o = off.getContext('2d');
       var tw = W * R.tile, th = tw * (tex.height || tex.naturalHeight) / (tex.width || tex.naturalWidth);
       var tile = seamlessTile(tex, tw, th);
-      for (var y = 0; y < H; y += tile.height) for (var x = 0; x < W; x += tile.width) o.drawImage(tile, x, y);
+      o.fillStyle = o.createPattern(tile, 'repeat'); o.fillRect(0, 0, W, H);
+      // light and contact shadows of the original wall (multiply), then back up to the true shade (x SHADE_GAIN)
       o.globalCompositeOperation = 'multiply'; o.drawImage(mask, 0, 0, W, H);
+      var cp = document.createElement('canvas'); cp.width = W; cp.height = H; cp.getContext('2d').drawImage(off, 0, 0);
+      o.globalCompositeOperation = 'lighter'; o.globalAlpha = SHADE_GAIN - 1; o.drawImage(cp, 0, 0);
+      o.globalAlpha = 1; cp.width = cp.height = 1;
       o.globalCompositeOperation = 'destination-in'; o.drawImage(mask, 0, 0, W, H);
-      ROOM.cache[key] = off; return off;
+      // object edges laid back over the coating (their soft pixels no longer carry the old wall colour)
+      o.globalCompositeOperation = 'source-over'; o.drawImage(edge, 0, 0, W, H);
+      ROOM.cache[key] = off; ROOM.order.push(key);
+      // keep memory bounded (each entry is a full-size canvas)
+      while (ROOM.order.length > 6) { var old = ROOM.order.shift(); if (old !== key) delete ROOM.cache[old]; }
+      return off;
     });
   }
-  var roomToken = 0;
+  /* before/after labels sit in the stage corners; a label fades out when the divider reaches it */
+  var baL = $('.rooms__ba--l'), baR = $('.rooms__ba--r');
+  function placeLabels() {
+    if (!roomStage || !baL || !baR) return;
+    var st = roomStage.getBoundingClientRect(); if (!st.width) return;
+    var lx = st.left + st.width * ROOM.split, gap = 14;
+    // the round handle stays whole inside the stage near the edges (the divider line itself is not moved)
+    var hx = st.width * ROOM.split, hm = 30;
+    roomStage.style.setProperty('--hx', (Math.max(hm, Math.min(st.width - hm, hx)) - hx).toFixed(1) + 'px');
+    var l = baL.getBoundingClientRect(), r = baR.getBoundingClientRect();
+    baL.classList.toggle('is-off', lx < l.right + gap);
+    baR.classList.toggle('is-off', lx > r.left - gap);
+  }
+  var roomToken = 0, roomView = { key: '' };
   function drawRoom() {
     if (!roomCanvas) return;
     var tok = ++roomToken, R = ROOMS[ROOM.id];
+    placeLabels();
+    roomStage.style.setProperty('--x', (ROOM.split * 100).toFixed(2) + '%');
     Promise.all([loadImg(R.img), coated(ROOM.id, ROOM.finish)]).then(function (r) {
       if (tok !== roomToken) return;
       sizeCanvas(roomCanvas, 2400);
       var im = r[0], off = r[1], cw = roomCanvas.width, ch = roomCanvas.height;
-      var s = Math.max(cw / im.naturalWidth, ch / im.naturalHeight);
-      var dw = im.naturalWidth * s, dh = im.naturalHeight * s;
-      var dx = (cw - dw) * R.fx, dy = (ch - dh) * R.fy;
+      // both layers are resampled to the canvas size once; dragging the divider then only blits them
+      var vk = ROOM.id + '|' + finishKey(ROOM.finish) + '|' + cw + 'x' + ch;
+      if (roomView.key !== vk || roomView.off !== off) {
+        var s = Math.max(cw / im.naturalWidth, ch / im.naturalHeight);
+        var dw = im.naturalWidth * s, dh = im.naturalHeight * s;
+        var dx = (cw - dw) * R.fx, dy = (ch - dh) * R.fy;
+        [['base', im], ['coat', off]].forEach(function (l) {
+          var c = roomView[l[0]] || (roomView[l[0]] = document.createElement('canvas'));
+          if (c.width !== cw || c.height !== ch) { c.width = cw; c.height = ch; }
+          var x = c.getContext('2d');
+          x.clearRect(0, 0, cw, ch); x.imageSmoothingEnabled = true; x.imageSmoothingQuality = 'high';
+          x.drawImage(l[1], dx, dy, dw, dh);
+        });
+        roomView.key = vk; roomView.off = off;
+      }
       var ctx = roomCanvas.getContext('2d');
-      ctx.clearRect(0, 0, cw, ch);
-      ctx.drawImage(im, dx, dy, dw, dh);
-      ctx.save(); ctx.beginPath(); ctx.rect(0, 0, cw * ROOM.split, ch); ctx.clip();
-      ctx.drawImage(off, dx, dy, dw, dh);
-      ctx.restore();
-      roomStage.style.setProperty('--x', (ROOM.split * 100).toFixed(2) + '%');
+      ctx.drawImage(roomView.base, 0, 0);
+      var sx = Math.round(cw * ROOM.split);
+      if (sx > 0) ctx.drawImage(roomView.coat, 0, 0, sx, ch, 0, 0, sx, ch);
     }).catch(function () {});
   }
   function renderRoomChips() {
