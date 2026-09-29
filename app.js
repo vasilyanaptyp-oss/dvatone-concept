@@ -883,9 +883,11 @@
      Interiors — wall visualizer (mask + shading map)
      ===================================================== */
   var ROOMS = {
-    d: { img: 'img/rooms/room-d.jpg', mask: 'img/rooms/room-d-mask.webp', edge: 'img/rooms/room-d-edge.webp', fx: 0.55, fy: 0.55, tile: 0.36 },
+    d: { img: 'img/rooms/room-d.jpg', mask: 'img/rooms/room-d-mask.webp', edge: 'img/rooms/room-d-edge.webp', fx: 0.55, fy: 0.55, tile: 0.36,
+         glass: { src: 'img/rooms/room-d-glass.webp', x: 1067, y: 682 } },
     a: { img: 'img/rooms/room-a.jpg', mask: 'img/rooms/room-a-mask.webp', edge: 'img/rooms/room-a-edge.webp', fx: 0.78, fy: 0.5, tile: 0.34 },
-    c: { img: 'img/rooms/room-c.jpg', mask: 'img/rooms/room-c-mask.webp', edge: 'img/rooms/room-c-edge.webp', fx: 0.5, fy: 0.5, tile: 0.34 }
+    c: { img: 'img/rooms/room-c.jpg', mask: 'img/rooms/room-c-mask.webp', edge: 'img/rooms/room-c-edge.webp', fx: 0.5, fy: 0.5, tile: 0.34,
+         glass: { src: 'img/rooms/room-c-glass.webp', x: 899, y: 407 } }
   };
   /* mask RGB = light on the wall, measured from the photo itself (255 = SHADE_GAIN x the chosen shade);
      mask alpha = coated area; edge layer = object edges with the old wall colour taken out (no halo) */
@@ -955,12 +957,50 @@
     Object.keys(ROOM.cache).forEach(function (k) { if (k.indexOf('|gen:') > -1) delete ROOM.cache[k]; });
     ROOM.order = ROOM.order.filter(function (k) { return !!ROOM.cache[k]; });
   }
+  /* clear glass in front of the wall (vase in d, decanters and tumblers in c). The photo there reads as
+     old wall x T + R (T = what the glass lets through, R = its highlights); the coated wall takes the old
+     wall's place, so the coating shows through while rims, edges, streaks and stems stay. The data file has
+     3 stacked blocks at glass.x/y: T x wall light / SHADE_GAIN (alpha = glass coverage), R, and how much the
+     glass smears the wall texture behind it (refraction). Opaque things inside carry T = 0, R = the photo. */
+  function blur3(a, w, h) {
+    var t = new Float32Array(a.length), o = new Float32Array(a.length), x, y, c, i, l, r;
+    for (y = 0; y < h; y++) for (x = 0; x < w; x++) {
+      i = (y * w + x) * 4; l = (y * w + Math.max(0, x - 1)) * 4; r = (y * w + Math.min(w - 1, x + 1)) * 4;
+      for (c = 0; c < 3; c++) t[i + c] = (a[l + c] + a[i + c] + a[r + c]) / 3;
+    }
+    for (y = 0; y < h; y++) for (x = 0; x < w; x++) {
+      i = (y * w + x) * 4; l = (Math.max(0, y - 1) * w + x) * 4; r = (Math.min(h - 1, y + 1) * w + x) * 4;
+      for (c = 0; c < 3; c++) o[i + c] = (t[l + c] + t[i + c] + t[r + c]) / 3;
+    }
+    return o;
+  }
+  function glassLayer(o, gimg, G) {
+    var w = gimg.naturalWidth, h = Math.round(gimg.naturalHeight / 3);
+    try {
+      var src = o.getImageData(G.x, G.y, w, h), t = src.data;   // the bare texture tile under the glass
+      var c = document.createElement('canvas'); c.width = w; c.height = h * 3;
+      var x = c.getContext('2d'); x.drawImage(gimg, 0, 0);
+      var gd = x.getImageData(0, 0, w, h * 3).data, n = w * h * 4;
+      var b = blur3(blur3(t, w, h), w, h), i, ch, k, v;
+      for (i = 0; i < n; i += 4) {
+        k = gd[2 * n + i] / 255 * 0.85;
+        for (ch = 0; ch < 3; ch++) {
+          v = t[i + ch] + (b[i + ch] - t[i + ch]) * k;
+          t[i + ch] = v * gd[i + ch] * SHADE_GAIN / 255 + gd[n + i + ch];
+        }
+        t[i + 3] = gd[i + 3];
+      }
+      c.height = h; x.putImageData(src, 0, 0);
+      return c;
+    } catch (e) { return null; }
+  }
   function coated(roomId, finish) {
     var key = roomId + '|' + finishKey(finish);
     if (ROOM.cache[key]) return Promise.resolve(ROOM.cache[key]);
     var R = ROOMS[roomId];
     var texP = finish.type === 'gen' ? Promise.resolve(genTexture()) : loadImg('img/tex/' + finish.hex + '.webp');
-    return Promise.all([loadImg(R.img), loadImg(R.mask), loadImg(R.edge), texP]).then(function (r) {
+    var glP = R.glass ? loadImg(R.glass.src).catch(function () { return null; }) : Promise.resolve(null);
+    return Promise.all([loadImg(R.img), loadImg(R.mask), loadImg(R.edge), texP, glP]).then(function (r) {
       if (ROOM.cache[key]) return ROOM.cache[key];
       var im = r[0], mask = r[1], edge = r[2], tex = r[3];
       var W = im.naturalWidth, H = im.naturalHeight;
@@ -969,6 +1009,7 @@
       var tw = W * R.tile, th = tw * (tex.height || tex.naturalHeight) / (tex.width || tex.naturalWidth);
       var tile = seamlessTile(tex, tw, th);
       o.fillStyle = o.createPattern(tile, 'repeat'); o.fillRect(0, 0, W, H);
+      var gl = r[4] ? glassLayer(o, r[4], R.glass) : null;
       // light and contact shadows of the original wall (multiply), then back up to the true shade (x SHADE_GAIN)
       o.globalCompositeOperation = 'multiply'; o.drawImage(mask, 0, 0, W, H);
       var cp = document.createElement('canvas'); cp.width = W; cp.height = H; cp.getContext('2d').drawImage(off, 0, 0);
@@ -977,6 +1018,7 @@
       o.globalCompositeOperation = 'destination-in'; o.drawImage(mask, 0, 0, W, H);
       // object edges laid back over the coating (their soft pixels no longer carry the old wall colour)
       o.globalCompositeOperation = 'source-over'; o.drawImage(edge, 0, 0, W, H);
+      if (gl) o.drawImage(gl, R.glass.x, R.glass.y);
       ROOM.cache[key] = off; ROOM.order.push(key);
       // keep memory bounded (each entry is a full-size canvas)
       while (ROOM.order.length > 6) { var old = ROOM.order.shift(); if (old !== key) delete ROOM.cache[old]; }
